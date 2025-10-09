@@ -12,11 +12,40 @@
         <h1>Catálogo de Filmes Incríveis</h1>
     </header>
 
-    <main>
-        <section id="catalogo-filmes" class="catalogo">
-            <h2>Filmes em Destaque</h2>
-            </section>
-    </main>
+<main>
+    <section id="adicionar-filme-form">
+        <h2>Adicionar Novo Filme</h2>
+        <form id="filme-form">
+            <div class="input-group">
+                <label for="titulo">Título:</label>
+                <input type="text" id="titulo" required>
+            </div>
+            <div class="input-group">
+                <label for="ano">Ano:</label>
+                <input type="number" id="ano" required min="1850" max="2100">
+            </div>
+            <div class="input-group">
+                <label for="genero">Gênero:</label>
+                <input type="text" id="genero" required>
+            </div>
+            <div class="input-group">
+                <label for="sinopse">Sinopse Curta:</label>
+                <textarea id="sinopse" required rows="3"></textarea>
+            </div>
+            <div class="input-group">
+                <label for="imagem">URL da Imagem (Pôster):</label>
+                <input type="url" id="imagem" value="https://via.placeholder.com/250x350/CCCCCC/000000?text=Novo+Filme">
+                </div>
+            <button type="submit">Adicionar ao Catálogo</button>
+        </form>
+    </section>
+    
+    <hr class="separator">
+
+    <section id="catalogo-filmes" class="catalogo">
+        <h2>Filmes em Destaque</h2>
+        </section>
+</main>
 
     <footer>
         <p>&copy; 2025 Catálogo Simples. Todos os direitos reservados.</p>
