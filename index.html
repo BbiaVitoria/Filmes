@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Filmes Dinâmico</title>
+    <title>Catálogo de Filmes Rosa Chic</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -25,7 +26,6 @@
                     <label for="ano">Ano:</label>
                     <input type="number" id="ano" required min="1850" max="2100">
                 </div>
-
                 <div class="input-group">
                     <label for="genero">Gênero:</label>
                     <select id="genero" required>
@@ -38,14 +38,26 @@
                         <option value="Terror">Terror</option>
                     </select>
                 </div>
-
+                
+                <div class="input-group">
+                    <label for="diretor">Diretor(a):</label>
+                    <input type="text" id="diretor" required>
+                </div>
+                <div class="input-group">
+                    <label for="produtora">Produtora:</label>
+                    <input type="text" id="produtora" required>
+                </div>
+                <div class="input-group full-width">
+                    <label for="personagens">Personagens Principais:</label>
+                    <input type="text" id="personagens" required placeholder="Separar por vírgulas">
+                </div>
                 <div class="input-group full-width">
                     <label for="sinopse">Sinopse Curta:</label>
                     <textarea id="sinopse" required rows="3"></textarea>
                 </div>
                 <div class="input-group full-width">
                     <label for="imagem">URL da Imagem (Pôster):</label>
-                    <input type="url" id="imagem" value="https://via.placeholder.com/250x350/1C768F/FFFFFF?text=Novo+Filme">
+                    <input type="url" id="imagem" value="https://via.placeholder.com/250x350/F8BBD0/FFFFFF?text=Novo+Filme">
                 </div>
                 <button type="submit" class="full-width">Adicionar ao Catálogo</button>
             </form>
@@ -56,11 +68,13 @@
         <section id="catalogo-exibicao">
             <h2>⭐ Filmes em Destaque</h2>
             <div id="catalogo-filmes" class="catalogo-grid">
-                </div>
-        </section> </main>
+            </div>
+        </section>
+
+    </main>
 
     <footer>
-        <p>Desenvolvido com HTML, CSS e JavaScript (localStorage para persistência).</p>
+        <p>Desenvolvido com cores e carinho.</p>
     </footer>
 
     <script src="script.js"></script>

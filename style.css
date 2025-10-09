@@ -5,20 +5,29 @@
     box-sizing: border-box;
 }
 
+/* Paleta de Cores:
+   - Fundo: #fdfdfd (quase branco)
+   - Destaque/Primária: #F8BBD0 (Rosa Claro)
+   - Secundária: #E91E63 (Rosa Escuro, para botões de ação)
+*/
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f0f2f5;
-    color: #333;
+    font-family: 'Montserrat', sans-serif; /* Nova Fonte */
+    background-color: #fdfdfd;
+    color: #444;
     line-height: 1.6;
 }
 
 /* Cabeçalho */
 header {
-    background-color: #1c768f; /* Azul escuro/Ciano */
-    color: white;
+    background-color: #F8BBD0; /* Rosa Claro */
+    color: #444;
     padding: 20px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+header h1 {
+    font-weight: 700;
 }
 
 main {
@@ -30,7 +39,7 @@ main {
 hr {
     border: none;
     height: 1px;
-    background-color: #ccc;
+    background-color: #f0f0f0;
     margin: 40px 0;
 }
 
@@ -38,51 +47,52 @@ hr {
 #adicionar-filme-section {
     background-color: white;
     padding: 30px;
+    border: 1px solid #F8BBD0;
     border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(248, 187, 208, 0.3); /* Sombra rosa suave */
 }
 
-#adicionar-filme-section h2 {
-    color: #1c768f;
+#adicionar-filme-section h2, #catalogo-exibicao h2 {
+    color: #E91E63; /* Rosa Escuro */
     margin-bottom: 25px;
+    font-weight: 600;
 }
 
 #filme-form {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    /* 3 colunas para acomodar os novos campos */
+    grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
 }
 
-.input-group {
-    display: flex;
-    flex-direction: column;
-}
-
+/* Define campos de largura total para certas informações */
 .input-group.full-width {
-    grid-column: 1 / 3; /* Faz com que ocupe as duas colunas */
+    grid-column: 1 / 4; 
 }
 
 label {
     font-weight: 600;
     margin-bottom: 5px;
-    color: #555;
+    color: #666;
 }
 
-input, textarea {
+input, textarea, select {
     padding: 10px;
-    border: 1px solid #ddd;
+    border: 1px solid #FFCDD2; /* Rosa mais escuro para borda */
     border-radius: 6px;
     font-size: 1em;
     width: 100%;
+    transition: border-color 0.3s;
 }
 
-textarea {
-    resize: vertical;
+input:focus, textarea:focus, select:focus {
+    border-color: #E91E63;
+    outline: none;
 }
 
 button {
-    grid-column: 1 / 3;
-    background-color: #28a745; /* Verde de sucesso */
+    grid-column: 1 / 4;
+    background-color: #E91E63; /* Rosa Escuro */
     color: white;
     padding: 12px 20px;
     border: none;
@@ -95,94 +105,59 @@ button {
 }
 
 button:hover {
-    background-color: #1f8b37;
+    background-color: #C2185B; /* Rosa mais profundo no hover */
 }
 
 /* --- ESTILOS DO CATÁLOGO --- */
-#catalogo-exibicao h2 {
-    text-align: center;
-    color: #1c768f;
-    margin-bottom: 30px;
-}
-
 .catalogo-grid {
     display: grid;
-    /* Layout do catálogo: 4 colunas em telas grandes, se ajustando */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
-/* Estilo do Cartão de Filme */
 .filme-card {
     background-color: white;
     border-radius: 10px;
     padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border: 1px solid #f0f0f0;
     transition: transform 0.3s, box-shadow 0.3s;
-    overflow: hidden; /* Garante que a imagem se ajuste */
+    overflow: hidden;
 }
 
 .filme-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 16px rgba(248, 187, 208, 0.5); /* Sombra rosa forte no hover */
 }
 
 .filme-card img {
     width: 100%;
-    height: 350px; /* Altura fixa para os pôsteres */
-    object-fit: cover; /* Garante que a imagem preencha o espaço sem distorcer */
+    height: 350px;
+    object-fit: cover;
     border-radius: 8px;
     margin-bottom: 10px;
 }
 
 .filme-card h3 {
     font-size: 1.4em;
-    color: #1c768f;
+    color: #E91E63;
     margin-bottom: 5px;
+    font-weight: 600;
 }
 
 .filme-card p {
-    font-size: 0.95em;
+    font-size: 0.9em;
     color: #666;
     margin-bottom: 3px;
 }
 
-.filme-card .sinopse {
-    font-style: italic;
+.filme-card strong {
     color: #444;
-    margin-top: 8px;
 }
 
-/* Responsividade do Formulário */
-@media (max-width: 768px) {
-    #filme-form {
-        grid-template-columns: 1fr; /* Volta para uma única coluna em telas menores */
-    }
-    .input-group.full-width,
-    button {
-        grid-column: 1 / 2;
-    }
-}
-
-/* Estilo para o campo select (Gênero) */
-select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    font-size: 1em;
-    width: 100%;
-    background-color: white;
-    appearance: none; /* Remove a seta padrão em alguns navegadores */
-}
-
-/* Estilo para o botão de exclusão no cartão */
-.delete-btn-container {
-    text-align: right;
-    margin-bottom: 10px;
-}
-
+/* Estilo do botão de exclusão */
 .delete-btn {
-    background-color: #dc3545; /* Vermelho para exclusão */
+    background-color: #FF5252; /* Vermelho para exclusão */
     color: white;
     border: none;
     padding: 5px 10px;
@@ -190,8 +165,29 @@ select {
     cursor: pointer;
     font-size: 0.8em;
     transition: background-color 0.2s;
+    float: right;
 }
 
 .delete-btn:hover {
-    background-color: #c82333;
+    background-color: #D32F2F;
+}
+
+/* Responsividade do Formulário */
+@media (max-width: 900px) {
+    #filme-form {
+        grid-template-columns: repeat(2, 1fr); /* Volta para 2 colunas em telas menores */
+    }
+    .input-group.full-width,
+    button {
+        grid-column: 1 / 3;
+    }
+}
+@media (max-width: 550px) {
+    #filme-form {
+        grid-template-columns: 1fr; /* 1 coluna em mobile */
+    }
+    .input-group.full-width,
+    button {
+        grid-column: 1 / 2;
+    }
 }
