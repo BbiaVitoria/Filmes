@@ -163,3 +163,35 @@ button:hover {
         grid-column: 1 / 2;
     }
 }
+
+/* Estilo para o campo select (Gênero) */
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    width: 100%;
+    background-color: white;
+    appearance: none; /* Remove a seta padrão em alguns navegadores */
+}
+
+/* Estilo para o botão de exclusão no cartão */
+.delete-btn-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
+
+.delete-btn {
+    background-color: #dc3545; /* Vermelho para exclusão */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8em;
+    transition: background-color 0.2s;
+}
+
+.delete-btn:hover {
+    background-color: #c82333;
+}
