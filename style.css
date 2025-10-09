@@ -8,10 +8,10 @@
 /* Paleta de Cores:
    - Fundo: #fdfdfd (quase branco)
    - Destaque/Primária: #F8BBD0 (Rosa Claro)
-   - Secundária: #E91E63 (Rosa Escuro, para botões de ação)
+   - Secundária: #E91E63 (Rosa Escuro, para botões de ação e títulos)
 */
 body {
-    font-family: 'Montserrat', sans-serif; /* Nova Fonte */
+    font-family: 'Montserrat', sans-serif; /* Fonte elegante */
     background-color: #fdfdfd;
     color: #444;
     line-height: 1.6;
@@ -53,19 +53,24 @@ hr {
 }
 
 #adicionar-filme-section h2, #catalogo-exibicao h2 {
-    color: #E91E63; /* Rosa Escuro */
+    color: #E91E63; /* Rosa Escuro para títulos */
     margin-bottom: 25px;
     font-weight: 600;
 }
 
 #filme-form {
     display: grid;
-    /* 3 colunas para acomodar os novos campos */
+    /* Define 3 colunas para o formulário */
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
 }
 
-/* Define campos de largura total para certas informações */
+.input-group {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Faz com que estes campos ocupem toda a largura (3 colunas) */
 .input-group.full-width {
     grid-column: 1 / 4; 
 }
@@ -82,6 +87,7 @@ input, textarea, select {
     border-radius: 6px;
     font-size: 1em;
     width: 100%;
+    background-color: white;
     transition: border-color 0.3s;
 }
 
@@ -109,12 +115,18 @@ button:hover {
 }
 
 /* --- ESTILOS DO CATÁLOGO --- */
+#catalogo-exibicao h2 {
+    text-align: center;
+}
+
 .catalogo-grid {
     display: grid;
+    /* Layout do catálogo: 4 colunas em telas grandes, se ajustando */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
 
+/* Estilo do Cartão de Filme */
 .filme-card {
     background-color: white;
     border-radius: 10px;
@@ -123,6 +135,7 @@ button:hover {
     border: 1px solid #f0f0f0;
     transition: transform 0.3s, box-shadow 0.3s;
     overflow: hidden;
+    position: relative;
 }
 
 .filme-card:hover {
@@ -155,7 +168,19 @@ button:hover {
     color: #444;
 }
 
+/* Estilo para a barra de separação interna do card */
+.filme-card hr {
+    margin: 5px 0;
+    border: none;
+    height: 1px;
+    background-color: #f0f0f0;
+}
+
 /* Estilo do botão de exclusão */
+.delete-btn-container {
+    text-align: right;
+    margin-bottom: 10px;
+}
 .delete-btn {
     background-color: #FF5252; /* Vermelho para exclusão */
     color: white;
@@ -165,29 +190,36 @@ button:hover {
     cursor: pointer;
     font-size: 0.8em;
     transition: background-color 0.2s;
-    float: right;
 }
 
 .delete-btn:hover {
     background-color: #D32F2F;
 }
 
-/* Responsividade do Formulário */
+/* --- RESPONSIVIDADE --- */
+/* Telas médias (como tablets) */
 @media (max-width: 900px) {
     #filme-form {
-        grid-template-columns: repeat(2, 1fr); /* Volta para 2 colunas em telas menores */
+        grid-template-columns: repeat(2, 1fr); /* Volta para 2 colunas */
     }
+    /* Elementos de largura total ocupam 2 colunas */
     .input-group.full-width,
     button {
         grid-column: 1 / 3;
     }
 }
+/* Telas pequenas (como celulares) */
 @media (max-width: 550px) {
     #filme-form {
         grid-template-columns: 1fr; /* 1 coluna em mobile */
     }
+    /* Elementos de largura total ocupam 1 coluna */
     .input-group.full-width,
     button {
         grid-column: 1 / 2;
+    }
+
+    .catalogo-grid {
+        gap: 20px; /* Reduz o espaçamento do grid de filmes */
     }
 }

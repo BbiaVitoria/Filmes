@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'catalogoDeFilmes_V3'; // Mudando a chave para evitar conflito com versões antigas
+const STORAGE_KEY = 'catalogoDeFilmes_V4'; // Nova chave
 
 // 1. Funções de Suporte
 function gerarIdUnico() {
@@ -7,6 +7,13 @@ function gerarIdUnico() {
 
 function salvarFilmes() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filmes));
+}
+
+// Função para gerar as estrelas (emojis)
+function gerarEstrelas(avaliacao) {
+    const estrelasCheias = '⭐'.repeat(avaliacao);
+    const estrelasVazias = '☆'.repeat(5 - avaliacao);
+    return estrelasCheias + estrelasVazias;
 }
 
 
@@ -21,22 +28,28 @@ function carregarFilmes() {
             titulo: "Mistério do Lago Rosa",
             ano: 2024,
             genero: "Suspense",
-            sinopse: "Um detetive investiga desaparecimentos estranhos perto de um lago incomum.",
-            imagem: "https://via.placeholder.com/250x350/F8BBD0/444444?text=Suspense+2024",
             diretor: "Ava Thorne",
             produtora: "Pink Moon Studios",
-            personagens: "Elara (Protagonista), Marcus (Detetive)"
+            personagens: "Elara (Protagonista), Marcus (Detetive)",
+            classificacao: 14, // Novo
+            duracao: 112,      // Novo
+            avaliacao: 4,      // Novo
+            sinopse: "Um detetive investiga desaparecimentos estranhos perto de um lago incomum.",
+            imagem: "https://via.placeholder.com/250x350/F8BBD0/444444?text=Suspense+2024",
         },
         {
             id: gerarIdUnico() + 2,
             titulo: "A Montanha de Açúcar",
             ano: 2021,
             genero: "Fantasia",
-            sinopse: "Uma garota embarca em uma jornada mágica para salvar seu reino doce.",
-            imagem: "https://via.placeholder.com/250x350/E91E63/FFFFFF?text=Fantasia+2021",
             diretor: "Leo Candy",
             produtora: "Dreamland Films",
-            personagens: "Princesa Doce, Dragão Chiclete"
+            personagens: "Princesa Doce, Dragão Chiclete",
+            classificacao: 0, // Novo
+            duracao: 95,      // Novo
+            avaliacao: 5,      // Novo
+            sinopse: "Uma garota embarca em uma jornada mágica para salvar seu reino doce.",
+            imagem: "https://via.placeholder.com/250x350/E91E63/FFFFFF?text=Fantasia+2021",
         }
     ];
 
@@ -76,6 +89,9 @@ function criarCartaoFilme(filme) {
         </div>
         <img src="${filme.imagem}" alt="Pôster do filme ${filme.titulo}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250x350/CCCCCC/000000?text=Sem+Imagem';">
         <h3>${filme.titulo}</h3>
+        <p><strong>Avaliação:</strong> <span style="font-size: 1.2em;">${gerarEstrelas(filme.avaliacao)}</span></p>
+        <p><strong>Classificação:</strong> ${filme.classificacao} Anos</p>
+        <p><strong>Duração:</strong> ${filme.duracao} min</p>
         <p><strong>Ano:</strong> ${filme.ano}</p>
         <p><strong>Gênero:</strong> ${filme.genero}</p>
         <hr style="margin: 5px 0; border-color: #f0f0f0;">
@@ -113,6 +129,9 @@ function handleFormSubmit(event) {
         diretor: document.getElementById('diretor').value,
         produtora: document.getElementById('produtora').value,
         personagens: document.getElementById('personagens').value,
+        classificacao: parseInt(document.getElementById('classificacao').value), // Novo
+        duracao: parseInt(document.getElementById('duracao').value),             // Novo
+        avaliacao: parseInt(document.getElementById('avaliacao').value),         // Novo
         sinopse: document.getElementById('sinopse').value,
         imagem: document.getElementById('imagem').value.trim() || "https://via.placeholder.com/250x350/F8BBD0/FFFFFF?text=Novo+Filme" 
     };
