@@ -1,14 +1,15 @@
 const STORAGE_KEY = 'catalogoDeFilmes_V2';
 
-// Função para gerar um ID único (Timestamp em milissegundos)
+// 1. Função para gerar um ID único (Timestamp em milissegundos)
 function gerarIdUnico() {
     return Date.now();
 }
 
-// 1. Inicializa ou carrega os filmes do localStorage
+// 2. Inicializa ou carrega os filmes do localStorage
 function carregarFilmes() {
     const filmesSalvos = localStorage.getItem(STORAGE_KEY);
-    // Adicionamos IDs aos filmes iniciais caso ainda não tenham
+    
+    // Filmes iniciais com IDs para garantir funcionalidade
     const filmesIniciais = [
         {
             id: gerarIdUnico() + 1,
@@ -28,10 +29,9 @@ function carregarFilmes() {
         }
     ];
 
-    // Se houver dados salvos, mapeamos para garantir que todos tenham um ID (se for a primeira vez)
     let listaFilmes = JSON.parse(filmesSalvos) || filmesIniciais;
     
-    // Garantir que todos os filmes tenham um ID
+    // Garante que todos os filmes, incluindo os carregados, tenham um ID
     listaFilmes = listaFilmes.map(filme => ({
         ...filme,
         id: filme.id || gerarIdUnico()
@@ -42,30 +42,28 @@ function carregarFilmes() {
 
 let filmes = carregarFilmes();
 
-// 2. Função para salvar o array 'filmes' no localStorage
+// 3. Função para salvar o array 'filmes' no localStorage
 function salvarFilmes() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filmes));
 }
 
 
-// 3. Função para EXCLUIR um filme
+// 4. Função para EXCLUIR um filme (Disponível globalmente para o onclick)
 window.excluirFilme = function(id) {
     if (confirm("Tem certeza que deseja excluir este filme?")) {
-        // Filtra a lista, mantendo apenas os filmes cujo ID é diferente do ID a ser excluído
+        // Filtra a lista, removendo o filme com o ID correspondente
         filmes = filmes.filter(filme => filme.id !== id);
         
         salvarFilmes();
         renderizarCatalogo(); // Recarrega a lista
-        alert("Filme excluído com sucesso!");
     }
 }
 
 
-// 4. Função para criar o cartão HTML de um filme (MODIFICADA)
+// 5. Função para criar o cartão HTML de um filme (Inclui botão de exclusão)
 function criarCartaoFilme(filme) {
     const card = document.createElement('div');
     card.classList.add('filme-card');
-    card.dataset.filmeId = filme.id; // Adiciona o ID do filme como um atributo de dado
 
     card.innerHTML = `
         <div class="delete-btn-container">
@@ -82,12 +80,11 @@ function criarCartaoFilme(filme) {
 }
 
 
-// 5. Função principal para renderizar o catálogo
+// 6. Função principal para renderizar o catálogo
 function renderizarCatalogo() {
     const catalogoContainer = document.getElementById('catalogo-filmes');
     catalogoContainer.innerHTML = '';
     
-    // Percorre o array e adiciona cada cartão ao container
     filmes.forEach(filme => {
         const cartao = criarCartaoFilme(filme);
         catalogoContainer.appendChild(cartao);
@@ -95,23 +92,20 @@ function renderizarCatalogo() {
 }
 
 
-// 6. Função que lida com o envio do formulário (MODIFICADA)
+// 7. Função que lida com o envio do formulário
 function handleFormSubmit(event) {
     event.preventDefault();
 
-    // Captura os valores do formulário
     const novoFilme = {
-        id: gerarIdUnico(), // Gera um ID único para o novo filme
+        id: gerarIdUnico(), // ID único para o novo filme
         titulo: document.getElementById('titulo').value,
         ano: parseInt(document.getElementById('ano').value),
-        genero: document.getElementById('genero').value, // Agora pega o valor do <select>
+        genero: document.getElementById('genero').value,
         sinopse: document.getElementById('sinopse').value,
         imagem: document.getElementById('imagem').value.trim() || "https://via.placeholder.com/250x350/1C768F/FFFFFF?text=Novo+Filme" 
     };
 
-    // Adiciona o novo filme no INÍCIO do array
     filmes.unshift(novoFilme);
-
     salvarFilmes();
     renderizarCatalogo();
 
@@ -121,7 +115,7 @@ function handleFormSubmit(event) {
 }
 
 
-// 7. Inicia a renderização e configura o listener do formulário
+// 8. Inicia a aplicação
 document.addEventListener('DOMContentLoaded', () => {
     renderizarCatalogo();
 
