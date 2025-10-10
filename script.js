@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'catalogoDeFilmes_V4'; 
+const STORAGE_KEY = 'catalogoDeFilmes_V5'; // Nova chave para a mudança de tipo de dado
 
 // 1. Funções de Suporte
 function gerarIdUnico() {
@@ -11,7 +11,6 @@ function salvarFilmes() {
 
 // Função para gerar as estrelas (emojis)
 function gerarEstrelas(avaliacao) {
-    // Garante que a avaliação seja um número entre 1 e 5
     const avaliacaoSegura = Math.max(1, Math.min(5, parseInt(avaliacao) || 0));
     const estrelasCheias = '⭐'.repeat(avaliacaoSegura);
     const estrelasVazias = '☆'.repeat(5 - avaliacaoSegura);
@@ -23,7 +22,7 @@ function gerarEstrelas(avaliacao) {
 function carregarFilmes() {
     const filmesSalvos = localStorage.getItem(STORAGE_KEY);
     
-    // Dados iniciais completos, incluindo todos os novos campos
+    // Dados iniciais com Classificação Indicativa como STRING
     const filmesIniciais = [
         {
             id: gerarIdUnico() + 1,
@@ -33,7 +32,7 @@ function carregarFilmes() {
             diretor: "Ava Thorne",
             produtora: "Pink Moon Studios",
             personagens: "Elara (Protagonista), Marcus (Detetive)",
-            classificacao: 14, 
+            classificacao: "14", // AGORA STRING
             duracao: 112,      
             avaliacao: 4,      
             sinopse: "Um detetive investiga desaparecimentos estranhos perto de um lago incomum.",
@@ -47,7 +46,7 @@ function carregarFilmes() {
             diretor: "Leo Candy",
             produtora: "Dreamland Films",
             personagens: "Princesa Doce, Dragão Chiclete",
-            classificacao: 0, 
+            classificacao: "Livre", // AGORA STRING
             duracao: 95,      
             avaliacao: 5,      
             sinopse: "Uma garota embarca em uma jornada mágica para salvar seu reino doce.",
@@ -57,7 +56,7 @@ function carregarFilmes() {
 
     let listaFilmes = JSON.parse(filmesSalvos) || filmesIniciais;
     
-    // Garante que todos os filmes, incluindo os carregados, tenham um ID
+    // Garante que todos os filmes tenham um ID
     listaFilmes = listaFilmes.map(filme => ({
         ...filme,
         id: filme.id || gerarIdUnico()
@@ -69,7 +68,7 @@ function carregarFilmes() {
 let filmes = carregarFilmes();
 
 
-// 3. Função para EXCLUIR um filme
+// 3. Função para EXCLUIR um filme (sem mudanças)
 window.excluirFilme = function(id) {
     if (confirm("Tem certeza que deseja excluir este filme?")) {
         filmes = filmes.filter(filme => filme.id !== id);
@@ -79,10 +78,13 @@ window.excluirFilme = function(id) {
 }
 
 
-// 4. Função para criar o cartão HTML de um filme (Foco na Avaliação/Duração/Classificação)
+// 4. Função para criar o cartão HTML de um filme (Ajuste na exibição da Classificação)
 function criarCartaoFilme(filme) {
     const card = document.createElement('div');
     card.classList.add('filme-card');
+    
+    // Formata a Classificação para exibição
+    const classificacaoDisplay = filme.classificacao === "Livre" ? "Livre" : `${filme.classificacao} Anos`;
 
     card.innerHTML = `
         <div class="delete-btn-container">
@@ -92,7 +94,7 @@ function criarCartaoFilme(filme) {
         <h3>${filme.titulo}</h3>
         
         <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
-        <p><strong>Classificação:</strong> ${filme.classificacao} Anos</p>
+        <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
         <p><strong>Duração:</strong> ${filme.duracao} min</p>
         
         <p><strong>Ano:</strong> ${filme.ano}</p>
@@ -108,7 +110,7 @@ function criarCartaoFilme(filme) {
 }
 
 
-// 5. Função principal para renderizar o catálogo (não houve mudanças)
+// 5. Função principal para renderizar o catálogo (sem mudanças)
 function renderizarCatalogo() {
     const catalogoContainer = document.getElementById('catalogo-filmes');
     catalogoContainer.innerHTML = '';
@@ -120,7 +122,7 @@ function renderizarCatalogo() {
 }
 
 
-// 6. Função que lida com o envio do formulário (Garante que os valores sejam numéricos)
+// 6. Função que lida com o envio do formulário (Ajuste para Classificação Indicativa)
 function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -132,8 +134,8 @@ function handleFormSubmit(event) {
         diretor: document.getElementById('diretor').value,
         produtora: document.getElementById('produtora').value,
         personagens: document.getElementById('personagens').value,
-        // Garante que os valores sejam lidos como números inteiros
-        classificacao: parseInt(document.getElementById('classificacao').value) || 0, 
+        // CLASSIFICAÇÃO: Lida como string (texto)
+        classificacao: document.getElementById('classificacao').value, 
         duracao: parseInt(document.getElementById('duracao').value) || 0,             
         avaliacao: parseInt(document.getElementById('avaliacao').value) || 1,         
         sinopse: document.getElementById('sinopse').value,
@@ -150,7 +152,7 @@ function handleFormSubmit(event) {
 }
 
 
-// 7. Inicia a aplicação (não houve mudanças)
+// 7. Inicia a aplicação (sem mudanças)
 document.addEventListener('DOMContentLoaded', () => {
     renderizarCatalogo();
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Filmes Rosa Chic</title>
+    <title>Catálogo de Filmes </title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -39,10 +39,19 @@
                     </select>
                 </div>
                 
-            <div class="input-group">
-    <label for="classificacao">Classificação Indicativa (Anos):</label>
-    <input type="number" id="classificacao" required min="0" max="18" placeholder="Ex: 12">
+                <div class="input-group">
+    <label for="classificacao">Classificação Indicativa:</label>
+    <select id="classificacao" required>
+        <option value="">-- Selecione a Classificação --</option>
+        <option value="Livre">Livre</option>
+        <option value="10">10</option>
+        <option value="12">12</option>
+        <option value="14">14</option>
+        <option value="16">16</option>
+        <option value="18">18</option>
+    </select>
 </div>
+
 <div class="input-group">
     <label for="duracao">Duração (minutos):</label>
     <input type="number" id="duracao" required min="10" placeholder="Ex: 90">
