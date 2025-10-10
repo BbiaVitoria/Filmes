@@ -216,6 +216,7 @@ button:hover {
     transition: background-color 0.2s;
 }
 
+
 .delete-btn:hover {
     background-color: #D32F2F;
 }
