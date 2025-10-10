@@ -5,31 +5,28 @@
     box-sizing: border-box;
 }
 
-/* * EFEITO GLITTER ANIMADO (Fundo)
- * Uma imagem de fundo que se move lentamente para dar o efeito de movimento
- */
-@keyframes moveBackground {
-    0% { background-position: 0% 0%; }
-    100% { background-position: 100% 100%; }
-}
+/* Paleta de Cores:
+   - Destaque/Primária: #F8BBD0 (Rosa Claro)
+   - Secundária: #E91E63 (Rosa Escuro, para títulos/botões)
+   - Acento: #FFC107 (Dourado Suave, para foco)
+*/
 
+/* Opção 1: Fundo Gradiente Suave */
 body {
     /* Novas fontes: Poppins para texto geral, Dancing Script para títulos */
     font-family: 'Poppins', sans-serif; 
-    color: #333; /* Texto mais escuro para contraste */
+    color: #333; 
     line-height: 1.6;
     
-    /* Fundo de Glitter (Simulado) */
-    background-color: #f7e8ec; /* Rosa bem clarinho */
-    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><filter id="f" x="0" y="0"><feTurbulence baseFrequency="0.6" numOctaves="3" type="fractalNoise" result="t"/><feColorMatrix type="saturate" values="0.3" in="t" result="g"/><feBlend in="SourceGraphic" in2="g" mode="multiply"/></filter></defs><rect width="100" height="100" fill="%23fff" filter="url(%23f)"/></svg>');
-    background-size: 800px 800px; /* Tamanho da textura */
-    animation: moveBackground 40s linear infinite alternate; /* Animação lenta */
+    /* GRADIENTE: Transição suave do branco para um rosa bem clarinho */
+    background: linear-gradient(135deg, #ffffff 0%, #fcecf0 100%); 
+    background-attachment: fixed; /* Fixa o gradiente para que não role com a página */
 }
 
 
 /* Cabeçalho */
 header {
-    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    background-color: rgba(255, 255, 255, 0.95); /* Branco semi-transparente */
     color: #E91E63;
     padding: 25px 0;
     text-align: center;
@@ -58,7 +55,7 @@ hr {
 
 /* --- ESTILOS DO FORMULÁRIO --- */
 #adicionar-filme-section {
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(255, 255, 255, 0.98);
     padding: 30px;
     border: 1px solid #FFCDD2; /* Rosa claro */
     border-radius: 15px;
@@ -66,7 +63,7 @@ hr {
 }
 
 #adicionar-filme-section h2, #catalogo-exibicao h2 {
-    color: #E91E63; /* Rosa Escuro */
+    color: #E91E63; 
     margin-bottom: 25px;
     font-weight: 600;
     font-family: 'Poppins', sans-serif;
@@ -104,14 +101,14 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #FFC107; /* Toque Dourado */
+    border-color: #FFC107; /* Toque Dourado no foco */
     box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
     outline: none;
 }
 
 button {
     grid-column: 1 / 4;
-    background-color: #E91E63; /* Rosa Escuro */
+    background-color: #E91E63; 
     color: white;
     padding: 15px 20px;
     border: none;
@@ -168,7 +165,7 @@ button:hover {
 }
 
 .filme-card-image-container:hover img {
-    transform: scale(1.08); /* Zoom ligeiramente maior */
+    transform: scale(1.08); /* Zoom */
 }
 
 /* Informações Visíveis */
@@ -190,10 +187,6 @@ button:hover {
     font-weight: 600;
 }
 
-/* Estrelas */
-.filme-card .filme-detalhes p:first-child {
-    font-size: 1em;
-}
 
 /* Seção de Detalhes Oculta (Lógica JS/CSS) */
 .filme-detalhes {
@@ -230,7 +223,6 @@ button:hover {
     font-size: 0.85em;
     font-weight: 400;
     transition: background-color 0.2s;
-    /* Sobrescreve as configurações de botão do formulário */
     grid-column: auto; 
     margin-top: 0;
 }
