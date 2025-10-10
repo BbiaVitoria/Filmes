@@ -88,6 +88,7 @@ function criarCartaoFilme(filme) {
     const card = document.createElement('div');
     card.classList.add('filme-card');
     
+    // Define como a classificação será exibida
     const classificacaoDisplay = filme.classificacao === "Livre" ? "Livre" : `${filme.classificacao} Anos`;
 
     card.innerHTML = `
@@ -100,16 +101,17 @@ function criarCartaoFilme(filme) {
         </div>
 
         <h3>${filme.titulo}</h3>
+        <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
+        <p><strong>Gênero:</strong> ${filme.genero}</p>
         
         <div class="filme-detalhes">
-            <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
-            <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
-            <p><strong>Duração:</strong> ${filme.duracao} min</p>
             
             <hr style="margin: 5px 0; border-color: #f0f0f0;">
             
+            <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
+            <p><strong>Duração:</strong> ${filme.duracao} min</p>
+
             <p><strong>Ano:</strong> ${filme.ano}</p>
-            <p><strong>Gênero:</strong> ${filme.genero}</p>
             <p><strong>Diretor(a):</strong> ${filme.diretor}</p>
             <p><strong>Produtora:</strong> ${filme.produtora}</p>
             <p><strong>Personagens:</strong> ${filme.personagens}</p>
