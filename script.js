@@ -1,4 +1,4 @@
-const STORAGE_KEY = 'catalogoDeFilmes_V5'; // Nova chave para a mudança de tipo de dado
+const STORAGE_KEY = 'catalogoDeFilmes_V5'; 
 
 // 1. Funções de Suporte
 function gerarIdUnico() {
@@ -9,7 +9,6 @@ function salvarFilmes() {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(filmes));
 }
 
-// Função para gerar as estrelas (emojis)
 function gerarEstrelas(avaliacao) {
     const avaliacaoSegura = Math.max(1, Math.min(5, parseInt(avaliacao) || 0));
     const estrelasCheias = '⭐'.repeat(avaliacaoSegura);
@@ -17,12 +16,19 @@ function gerarEstrelas(avaliacao) {
     return estrelasCheias + estrelasVazias;
 }
 
+// 2. Lógica para mostrar/esconder detalhes ao clicar na imagem
+window.toggleDetalhes = function(element) {
+    const card = element.closest('.filme-card');
+    const detalhes = card.querySelector('.filme-detalhes');
+    
+    // Alterna a classe 'expanded' para aplicar a transição CSS
+    detalhes.classList.toggle('expanded');
+}
 
-// 2. Inicializa ou carrega os filmes do localStorage (Dados Iniciais Corrigidos)
+// 3. Inicializa ou carrega os filmes (Sem mudanças nos dados, apenas no armazenamento)
 function carregarFilmes() {
     const filmesSalvos = localStorage.getItem(STORAGE_KEY);
     
-    // Dados iniciais com Classificação Indicativa como STRING
     const filmesIniciais = [
         {
             id: gerarIdUnico() + 1,
@@ -32,7 +38,7 @@ function carregarFilmes() {
             diretor: "Ava Thorne",
             produtora: "Pink Moon Studios",
             personagens: "Elara (Protagonista), Marcus (Detetive)",
-            classificacao: "14", // AGORA STRING
+            classificacao: "14", 
             duracao: 112,      
             avaliacao: 4,      
             sinopse: "Um detetive investiga desaparecimentos estranhos perto de um lago incomum.",
@@ -46,7 +52,7 @@ function carregarFilmes() {
             diretor: "Leo Candy",
             produtora: "Dreamland Films",
             personagens: "Princesa Doce, Dragão Chiclete",
-            classificacao: "Livre", // AGORA STRING
+            classificacao: "Livre", 
             duracao: 95,      
             avaliacao: 5,      
             sinopse: "Uma garota embarca em uma jornada mágica para salvar seu reino doce.",
@@ -56,7 +62,6 @@ function carregarFilmes() {
 
     let listaFilmes = JSON.parse(filmesSalvos) || filmesIniciais;
     
-    // Garante que todos os filmes tenham um ID
     listaFilmes = listaFilmes.map(filme => ({
         ...filme,
         id: filme.id || gerarIdUnico()
@@ -68,7 +73,7 @@ function carregarFilmes() {
 let filmes = carregarFilmes();
 
 
-// 3. Função para EXCLUIR um filme (sem mudanças)
+// 4. Função para EXCLUIR um filme (sem mudanças)
 window.excluirFilme = function(id) {
     if (confirm("Tem certeza que deseja excluir este filme?")) {
         filmes = filmes.filter(filme => filme.id !== id);
@@ -78,39 +83,45 @@ window.excluirFilme = function(id) {
 }
 
 
-// 4. Função para criar o cartão HTML de um filme (Ajuste na exibição da Classificação)
+// 5. Função para criar o cartão HTML de um filme (ESTRUTURA MODIFICADA)
 function criarCartaoFilme(filme) {
     const card = document.createElement('div');
     card.classList.add('filme-card');
     
-    // Formata a Classificação para exibição
     const classificacaoDisplay = filme.classificacao === "Livre" ? "Livre" : `${filme.classificacao} Anos`;
 
     card.innerHTML = `
         <div class="delete-btn-container">
             <button class="delete-btn" onclick="excluirFilme(${filme.id})">Excluir</button>
         </div>
-        <img src="${filme.imagem}" alt="Pôster do filme ${filme.titulo}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250x350/CCCCCC/000000?text=Sem+Imagem';">
+        
+        <div class="filme-card-image-container" onclick="toggleDetalhes(this)">
+            <img src="${filme.imagem}" alt="Pôster do filme ${filme.titulo}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250x350/CCCCCC/000000?text=Sem+Imagem';">
+        </div>
+
         <h3>${filme.titulo}</h3>
         
-        <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
-        <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
-        <p><strong>Duração:</strong> ${filme.duracao} min</p>
-        
-        <p><strong>Ano:</strong> ${filme.ano}</p>
-        <p><strong>Gênero:</strong> ${filme.genero}</p>
-        <hr style="margin: 5px 0; border-color: #f0f0f0;">
-        <p><strong>Diretor(a):</strong> ${filme.diretor}</p>
-        <p><strong>Produtora:</strong> ${filme.produtora}</p>
-        <p><strong>Personagens:</strong> ${filme.personagens}</p>
-        <p class="sinopse" style="margin-top: 10px;">${filme.sinopse}</p>
+        <div class="filme-detalhes">
+            <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
+            <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
+            <p><strong>Duração:</strong> ${filme.duracao} min</p>
+            
+            <hr style="margin: 5px 0; border-color: #f0f0f0;">
+            
+            <p><strong>Ano:</strong> ${filme.ano}</p>
+            <p><strong>Gênero:</strong> ${filme.genero}</p>
+            <p><strong>Diretor(a):</strong> ${filme.diretor}</p>
+            <p><strong>Produtora:</strong> ${filme.produtora}</p>
+            <p><strong>Personagens:</strong> ${filme.personagens}</p>
+            <p class="sinopse" style="margin-top: 10px;">${filme.sinopse}</p>
+        </div>
     `;
 
     return card;
 }
 
 
-// 5. Função principal para renderizar o catálogo (sem mudanças)
+// 6. Funções de renderização e formulário (sem mudanças)
 function renderizarCatalogo() {
     const catalogoContainer = document.getElementById('catalogo-filmes');
     catalogoContainer.innerHTML = '';
@@ -121,8 +132,6 @@ function renderizarCatalogo() {
     });
 }
 
-
-// 6. Função que lida com o envio do formulário (Ajuste para Classificação Indicativa)
 function handleFormSubmit(event) {
     event.preventDefault();
 
@@ -134,7 +143,6 @@ function handleFormSubmit(event) {
         diretor: document.getElementById('diretor').value,
         produtora: document.getElementById('produtora').value,
         personagens: document.getElementById('personagens').value,
-        // CLASSIFICAÇÃO: Lida como string (texto)
         classificacao: document.getElementById('classificacao').value, 
         duracao: parseInt(document.getElementById('duracao').value) || 0,             
         avaliacao: parseInt(document.getElementById('avaliacao').value) || 1,         

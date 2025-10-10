@@ -121,7 +121,6 @@ button:hover {
 
 .catalogo-grid {
     display: grid;
-    /* Layout do catálogo: 4 colunas em telas grandes, se ajustando */
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 30px;
 }
@@ -133,14 +132,17 @@ button:hover {
     padding: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     border: 1px solid #f0f0f0;
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: box-shadow 0.3s;
     overflow: hidden;
     position: relative;
 }
 
-.filme-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(248, 187, 208, 0.5); /* Sombra rosa forte no hover */
+/* Container da Imagem para aplicar o efeito de zoom e clique */
+.filme-card-image-container {
+    overflow: hidden; /* Corta a imagem que sai do container no zoom */
+    border-radius: 8px;
+    margin-bottom: 10px;
+    cursor: pointer; /* Indica que o elemento é clicável */
 }
 
 .filme-card img {
@@ -148,7 +150,13 @@ button:hover {
     height: 350px;
     object-fit: cover;
     border-radius: 8px;
-    margin-bottom: 10px;
+    /* Configura o efeito de transição para o zoom */
+    transition: transform 0.3s ease-in-out; 
+}
+
+/* Efeito de zoom ao passar o mouse */
+.filme-card-image-container:hover img {
+    transform: scale(1.05); /* Aumenta a imagem em 5% */
 }
 
 .filme-card h3 {
@@ -156,6 +164,22 @@ button:hover {
     color: #E91E63;
     margin-bottom: 5px;
     font-weight: 600;
+}
+
+/* Estilo para a seção de detalhes que deve ser escondida */
+.filme-detalhes {
+    max-height: 0; /* Começa com altura zero */
+    opacity: 0; /* Começa invisível */
+    overflow: hidden;
+    /* Adiciona uma transição suave para a abertura */
+    transition: max-height 0.5s ease-out, opacity 0.4s ease-out;
+}
+
+/* Classe adicionada por JS quando o card é clicado */
+.filme-detalhes.expanded {
+    max-height: 1000px; /* Valor grande para mostrar todo o conteúdo */
+    opacity: 1; /* Torna visível */
+    padding-top: 10px;
 }
 
 .filme-card p {
