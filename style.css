@@ -5,29 +5,42 @@
     box-sizing: border-box;
 }
 
-/* Paleta de Cores:
-   - Fundo: #fdfdfd (quase branco)
-   - Destaque/Primária: #F8BBD0 (Rosa Claro)
-   - Secundária: #E91E63 (Rosa Escuro, para botões de ação e títulos)
-*/
-body {
-    font-family: 'Montserrat', sans-serif; /* Fonte elegante */
-    background-color: #fdfdfd;
-    color: #444;
-    line-height: 1.6;
+/* * EFEITO GLITTER ANIMADO (Fundo)
+ * Uma imagem de fundo que se move lentamente para dar o efeito de movimento
+ */
+@keyframes moveBackground {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
 }
+
+body {
+    /* Novas fontes: Poppins para texto geral, Dancing Script para títulos */
+    font-family: 'Poppins', sans-serif; 
+    color: #333; /* Texto mais escuro para contraste */
+    line-height: 1.6;
+    
+    /* Fundo de Glitter (Simulado) */
+    background-color: #f7e8ec; /* Rosa bem clarinho */
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><defs><filter id="f" x="0" y="0"><feTurbulence baseFrequency="0.6" numOctaves="3" type="fractalNoise" result="t"/><feColorMatrix type="saturate" values="0.3" in="t" result="g"/><feBlend in="SourceGraphic" in2="g" mode="multiply"/></filter></defs><rect width="100" height="100" fill="%23fff" filter="url(%23f)"/></svg>');
+    background-size: 800px 800px; /* Tamanho da textura */
+    animation: moveBackground 40s linear infinite alternate; /* Animação lenta */
+}
+
 
 /* Cabeçalho */
 header {
-    background-color: #F8BBD0; /* Rosa Claro */
-    color: #444;
-    padding: 20px 0;
+    background-color: rgba(255, 255, 255, 0.9); /* Branco semi-transparente */
+    color: #E91E63;
+    padding: 25px 0;
     text-align: center;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 header h1 {
+    font-family: 'Dancing Script', cursive; /* Fonte estilizada */
+    font-size: 2.8em;
     font-weight: 700;
+    letter-spacing: 2px;
 }
 
 main {
@@ -39,28 +52,28 @@ main {
 hr {
     border: none;
     height: 1px;
-    background-color: #f0f0f0;
+    background-color: rgba(233, 30, 99, 0.2);
     margin: 40px 0;
 }
 
 /* --- ESTILOS DO FORMULÁRIO --- */
 #adicionar-filme-section {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.95);
     padding: 30px;
-    border: 1px solid #F8BBD0;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(248, 187, 208, 0.3); /* Sombra rosa suave */
+    border: 1px solid #FFCDD2; /* Rosa claro */
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(233, 30, 99, 0.2); 
 }
 
 #adicionar-filme-section h2, #catalogo-exibicao h2 {
-    color: #E91E63; /* Rosa Escuro para títulos */
+    color: #E91E63; /* Rosa Escuro */
     margin-bottom: 25px;
     font-weight: 600;
+    font-family: 'Poppins', sans-serif;
 }
 
 #filme-form {
     display: grid;
-    /* Define 3 colunas para o formulário */
     grid-template-columns: repeat(3, 1fr); 
     gap: 20px;
 }
@@ -70,29 +83,29 @@ hr {
     flex-direction: column;
 }
 
-/* Faz com que estes campos ocupem toda a largura (3 colunas) */
 .input-group.full-width {
     grid-column: 1 / 4; 
 }
 
 label {
-    font-weight: 600;
+    font-weight: 400;
     margin-bottom: 5px;
     color: #666;
 }
 
 input, textarea, select {
-    padding: 10px;
-    border: 1px solid #FFCDD2; /* Rosa mais escuro para borda */
-    border-radius: 6px;
+    padding: 12px;
+    border: 1px solid #F8BBD0; 
+    border-radius: 8px;
     font-size: 1em;
     width: 100%;
-    background-color: white;
-    transition: border-color 0.3s;
+    background-color: #fff;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
 input:focus, textarea:focus, select:focus {
-    border-color: #E91E63;
+    border-color: #FFC107; /* Toque Dourado */
+    box-shadow: 0 0 5px rgba(255, 193, 7, 0.5);
     outline: none;
 }
 
@@ -100,18 +113,19 @@ button {
     grid-column: 1 / 4;
     background-color: #E91E63; /* Rosa Escuro */
     color: white;
-    padding: 12px 20px;
+    padding: 15px 20px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
     font-size: 1.1em;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    font-weight: 600;
+    transition: background-color 0.3s, transform 0.2s;
     margin-top: 10px;
 }
 
 button:hover {
-    background-color: #C2185B; /* Rosa mais profundo no hover */
+    background-color: #C2185B; 
+    transform: translateY(-2px);
 }
 
 /* --- ESTILOS DO CATÁLOGO --- */
@@ -127,78 +141,79 @@ button:hover {
 
 /* Estilo do Cartão de Filme */
 .filme-card {
-    background-color: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    border: 1px solid #f0f0f0;
+    background-color: rgba(255, 255, 255, 0.98);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border: 1px solid #FFCDD2;
     transition: box-shadow 0.3s;
     overflow: hidden;
     position: relative;
 }
 
-/* Container da Imagem para aplicar o efeito de zoom e clique */
+/* Efeito de zoom */
 .filme-card-image-container {
-    overflow: hidden; /* Corta a imagem que sai do container no zoom */
-    border-radius: 8px;
+    overflow: hidden; 
+    border-radius: 10px;
     margin-bottom: 10px;
-    cursor: pointer; /* Indica que o elemento é clicável */
+    cursor: pointer; 
 }
 
 .filme-card img {
     width: 100%;
     height: 350px;
     object-fit: cover;
-    border-radius: 8px;
-    /* Configura o efeito de transição para o zoom */
+    border-radius: 10px;
     transition: transform 0.3s ease-in-out; 
 }
 
-/* Efeito de zoom ao passar o mouse */
 .filme-card-image-container:hover img {
-    transform: scale(1.05); /* Aumenta a imagem em 5% */
+    transform: scale(1.08); /* Zoom ligeiramente maior */
 }
 
+/* Informações Visíveis */
 .filme-card h3 {
-    font-size: 1.4em;
+    font-family: 'Dancing Script', cursive; /* Título em fonte estilizada */
+    font-size: 1.8em;
     color: #E91E63;
     margin-bottom: 5px;
-    font-weight: 600;
-}
-
-/* Estilo para a seção de detalhes que deve ser escondida */
-.filme-detalhes {
-    max-height: 0; /* Começa com altura zero */
-    opacity: 0; /* Começa invisível */
-    overflow: hidden;
-    /* Adiciona uma transição suave para a abertura */
-    transition: max-height 0.5s ease-out, opacity 0.4s ease-out;
-}
-
-/* Classe adicionada por JS quando o card é clicado */
-.filme-detalhes.expanded {
-    max-height: 1000px; /* Valor grande para mostrar todo o conteúdo */
-    opacity: 1; /* Torna visível */
-    padding-top: 10px;
 }
 
 .filme-card p {
-    font-size: 0.9em;
-    color: #666;
-    margin-bottom: 3px;
+    font-size: 0.95em;
+    color: #555;
+    margin-bottom: 5px;
 }
 
 .filme-card strong {
-    color: #444;
+    color: #333;
+    font-weight: 600;
 }
 
-/* Estilo para a barra de separação interna do card */
-.filme-card hr {
-    margin: 5px 0;
-    border: none;
-    height: 1px;
-    background-color: #f0f0f0;
+/* Estrelas */
+.filme-card .filme-detalhes p:first-child {
+    font-size: 1em;
 }
+
+/* Seção de Detalhes Oculta (Lógica JS/CSS) */
+.filme-detalhes {
+    max-height: 0; 
+    opacity: 0; 
+    overflow: hidden;
+    transition: max-height 0.6s ease-out, opacity 0.5s ease-out;
+}
+
+.filme-detalhes.expanded {
+    max-height: 1000px; 
+    opacity: 1; 
+    padding-top: 15px;
+}
+
+.filme-card hr {
+    margin: 10px 0;
+    background-color: #FFCDD2;
+}
+
 
 /* Estilo do botão de exclusão */
 .delete-btn-container {
@@ -206,45 +221,41 @@ button:hover {
     margin-bottom: 10px;
 }
 .delete-btn {
-    background-color: #FF5252; /* Vermelho para exclusão */
+    background-color: #FF5252; 
     color: white;
     border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
+    padding: 6px 12px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 0.8em;
+    font-size: 0.85em;
+    font-weight: 400;
     transition: background-color 0.2s;
+    /* Sobrescreve as configurações de botão do formulário */
+    grid-column: auto; 
+    margin-top: 0;
 }
-
 
 .delete-btn:hover {
     background-color: #D32F2F;
 }
 
 /* --- RESPONSIVIDADE --- */
-/* Telas médias (como tablets) */
 @media (max-width: 900px) {
     #filme-form {
-        grid-template-columns: repeat(2, 1fr); /* Volta para 2 colunas */
+        grid-template-columns: repeat(2, 1fr);
     }
-    /* Elementos de largura total ocupam 2 colunas */
-    .input-group.full-width,
-    button {
+    .input-group.full-width, button {
         grid-column: 1 / 3;
     }
 }
-/* Telas pequenas (como celulares) */
 @media (max-width: 550px) {
     #filme-form {
-        grid-template-columns: 1fr; /* 1 coluna em mobile */
+        grid-template-columns: 1fr;
     }
-    /* Elementos de largura total ocupam 1 coluna */
-    .input-group.full-width,
-    button {
+    .input-group.full-width, button {
         grid-column: 1 / 2;
     }
-
-    .catalogo-grid {
-        gap: 20px; /* Reduz o espaçamento do grid de filmes */
+    header h1 {
+        font-size: 2em;
     }
 }
