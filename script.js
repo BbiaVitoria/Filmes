@@ -83,10 +83,45 @@ window.excluirFilme = function(id) {
 }
 
 
-// 5. Função para criar o cartão HTML de um filme (ESTRUTURA MODIFICADA)
+// 5. Função para criar o cartão HTML de um filme (Gênero está de volta na seção oculta)
 function criarCartaoFilme(filme) {
     const card = document.createElement('div');
     card.classList.add('filme-card');
+    
+    // Define como a classificação será exibida
+    const classificacaoDisplay = filme.classificacao === "Livre" ? "Livre" : `${filme.classificacao} Anos`;
+
+    card.innerHTML = `
+        <div class="delete-btn-container">
+            <button class="delete-btn" onclick="excluirFilme(${filme.id})">Excluir</button>
+        </div>
+        
+        <div class="filme-card-image-container" onclick="toggleDetalhes(this)">
+            <img src="${filme.imagem}" alt="Pôster do filme ${filme.titulo}" onerror="this.onerror=null;this.src='https://via.placeholder.com/250x350/CCCCCC/000000?text=Sem+Imagem';">
+        </div>
+
+        <h3>${filme.titulo}</h3>
+        <p><strong>Avaliação:</strong> <span style="font-size: 1.2em; color: #E91E63;">${gerarEstrelas(filme.avaliacao)}</span></p>
+        
+        <div class="filme-detalhes">
+            
+            <hr style="margin: 5px 0; border-color: #f0f0f0;">
+            
+            <p><strong>Gênero:</strong> ${filme.genero}</p>
+            <p><strong>Classificação:</strong> ${classificacaoDisplay}</p>
+            <p><strong>Duração:</strong> ${filme.duracao} min</p>
+
+            <p><strong>Ano:</strong> ${filme.ano}</p>
+            <p><strong>Diretor(a):</strong> ${filme.diretor}</p>
+            <p><strong>Produtora:</strong> ${filme.produtora}</p>
+            <p><strong>Personagens:</strong> ${filme.personagens}</p>
+            <p class="sinopse" style="margin-top: 10px;">${filme.sinopse}</p>
+        </div>
+    `;
+
+    return card;
+}
+// ... (mantenha o restante do script.js inalterado)
     
     // Define como a classificação será exibida
     const classificacaoDisplay = filme.classificacao === "Livre" ? "Livre" : `${filme.classificacao} Anos`;
