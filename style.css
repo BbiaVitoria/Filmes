@@ -19,7 +19,7 @@ body {
     line-height: 1.6;
     
     /* GRADIENTE: De cima para baixo (to bottom) */
-    background: linear-gradient(to bottom, #f192aa 0%, #ffffff 80%); 
+    background: linear-gradient(to bottom, #f192aa 5%, #ffffff 80%); 
     background-attachment: fixed; /* Fixa o gradiente para que não role com a página */
 }
 
