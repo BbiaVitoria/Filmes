@@ -15,6 +15,21 @@
 
     <main>
         
+        <section id="pesquisar-filme-section">
+            <h2>🔍 Pesquisar no OMDB</h2>
+            <form id="pesquisa-form">
+                <div class="input-group full-width">
+                    <label for="termo-pesquisa">Título do Filme:</label>
+                    <input type="text" id="termo-pesquisa" required placeholder="Digite o nome do filme para buscar na web">
+                </div>
+                <button type="submit" class="full-width" style="grid-column: 1 / 4;">Buscar no OMDB</button>
+            </form>
+            <div id="resultados-pesquisa" class="catalogo-grid" style="margin-top: 20px;">
+                </div>
+        </section>
+
+        <hr>
+        
         <section id="adicionar-filme-section">
             <h2>➕ Adicionar Novo Filme</h2>
             <form id="filme-form">
