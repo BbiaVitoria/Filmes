@@ -3,115 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Catálogo de Filmes Glamour</title>
+    <title>Pesquisa de Filmes OMDB</title>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <header>
-        <h1>🎬 Meu Catálogo de Filmes Pessoal</h1>
+        <h1>🎬 Pesquisar Filmes no OMDB</h1>
     </header>
 
     <main>
         
         <section id="pesquisar-filme-section">
-            <h2>🔍 Pesquisar no OMDB</h2>
+            <h2>🔍 Buscar Título</h2>
             <form id="pesquisa-form">
                 <div class="input-group full-width">
                     <label for="termo-pesquisa">Título do Filme:</label>
                     <input type="text" id="termo-pesquisa" required placeholder="Digite o nome do filme para buscar na web">
                 </div>
-                <button type="submit" class="full-width" style="grid-column: 1 / 4;">Buscar no OMDB</button>
+                <button type="submit" class="full-width">Buscar no OMDB</button>
             </form>
+            
             <div id="resultados-pesquisa" class="catalogo-grid" style="margin-top: 20px;">
                 </div>
-        </section>
-
-        <hr>
-        
-        <section id="adicionar-filme-section">
-            <h2>➕ Adicionar Novo Filme</h2>
-            <form id="filme-form">
-                <div class="input-group">
-                    <label for="titulo">Título:</label>
-                    <input type="text" id="titulo" required>
-                </div>
-                <div class="input-group">
-                    <label for="ano">Ano:</label>
-                    <input type="number" id="ano" required min="1850" max="2100">
-                </div>
-                <div class="input-group">
-                    <label for="genero">Gênero:</label>
-                    <select id="genero" required>
-                        <option value="">-- Selecione um Gênero --</option>
-                        <option value="Ação">Ação</option>
-                        <option value="Aventura">Aventura</option>
-                        <option value="Animação">Animação</option>
-                        <option value="Fantasia">Fantasia</option>
-                        <option value="Ficção Científica">Ficção Científica</option>
-                        <option value="Terror">Terror</option>
-                    </select>
-                </div>
-                
-                <div class="input-group">
-    <label for="classificacao">Classificação Indicativa:</label>
-    <select id="classificacao" required>
-        <option value="">-- Selecione a Classificação --</option>
-        <option value="Livre">Livre</option>
-        <option value="10">10</option>
-        <option value="12">12</option>
-        <option value="14">14</option>
-        <option value="16">16</option>
-        <option value="18">18</option>
-    </select>
-</div>
-
-<div class="input-group">
-    <label for="duracao">Duração (minutos):</label>
-    <input type="number" id="duracao" required min="10" placeholder="Ex: 90">
-</div>
-<div class="input-group">
-    <label for="avaliacao">Avaliação (Estrelas 1-5):</label>
-    <input type="number" id="avaliacao" required min="1" max="5" placeholder="Ex: 4">
-</div>
-
-                <div class="input-group">
-                    <label for="diretor">Diretor(a):</label>
-                    <input type="text" id="diretor" required>
-                </div>
-                <div class="input-group">
-                    <label for="produtora">Produtora:</label>
-                    <input type="text" id="produtora" required>
-                </div>
-                <div class="input-group full-width">
-                    <label for="personagens">Personagens Principais:</label>
-                    <input type="text" id="personagens" required placeholder="Separar por vírgulas">
-                </div>
-                <div class="input-group full-width">
-                    <label for="sinopse">Sinopse Curta:</label>
-                    <textarea id="sinopse" required rows="3"></textarea>
-                </div>
-                <div class="input-group full-width">
-                    <label for="imagem">URL da Imagem (Pôster):</label>
-                    <input type="url" id="imagem" value="https://via.placeholder.com/250x350/F8BBD0/FFFFFF?text=Novo+Filme">
-                </div>
-                <button type="submit" class="full-width">Adicionar ao Catálogo</button>
-            </form>
-        </section>
-        
-        <hr>
-
-        <section id="catalogo-exibicao">
-            <h2>⭐ Filmes em Destaque</h2>
-            <div id="catalogo-filmes" class="catalogo-grid">
-            </div>
         </section>
 
     </main>
 
     <footer>
-        
+        <p>&copy; 2025 Pesquisa OMDB</p>
     </footer>
 
     <script src="script.js"></script>
